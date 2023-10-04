@@ -1,7 +1,11 @@
-import { Container } from "./components/Container";
+import { Banner, Feature, ValueProposition } from "@/components/home";
 
-const Home = () => {
-    return <Container className="bg-red-200">sup</Container>;
-};
+const Home = () => (
+    <>
+        <Banner />
+        <ValueProposition />
+        <Feature />
+    </>
+);
 
 export default Home;
