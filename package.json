@@ -9,6 +9,7 @@
         "prettier-check": "pnpm dlx prettier --check ."
     },
     "dependencies": {
+        "@kinde-oss/kinde-auth-nextjs": "^1.8.22",
         "@radix-ui/react-slot": "^1.0.2",
         "@tailwindcss/typography": "^0.5.10",
         "@types/node": "20.8.2",

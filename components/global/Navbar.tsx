@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { Container } from "./Container";
 import { buttonVariants } from "@/components/ui/button";
-// import {
-//     LoginLink,
-//     RegisterLink,
-//     getKindeServerSession
-// } from "@kinde-oss/kinde-auth-nextjs/server";
+import {
+    LoginLink,
+    RegisterLink,
+    getKindeServerSession
+} from "@kinde-oss/kinde-auth-nextjs/server";
 import { ArrowRight } from "lucide-react";
 // import UserAccountNav from "./UserAccountNav";
 // import MobileNav from "./MobileNav";
@@ -19,7 +19,7 @@ export const Navbar = () => {
             <Container>
                 <div className="flex h-14 items-center justify-between border-b border-zinc-200">
                     <Link href="/" className="z-40 flex font-semibold">
-                        <span>quill.</span>
+                        quill.
                     </Link>
 
                     {/* <MobileNav isAuth={!!user} />
@@ -87,23 +87,23 @@ export const Navbar = () => {
                         >
                             Pricing
                         </Link>
-                        <Link
-                            href="/"
+
+                        <LoginLink
                             className={buttonVariants({
                                 variant: "ghost",
                                 size: "sm"
                             })}
                         >
                             Sign in
-                        </Link>
-                        <Link
-                            href="/"
+                        </LoginLink>
+
+                        <RegisterLink
                             className={buttonVariants({
                                 size: "sm"
                             })}
                         >
                             Get started <ArrowRight className="ml-1.5 h-5 w-5" />
-                        </Link>
+                        </RegisterLink>
                     </div>
                 </div>
             </Container>
