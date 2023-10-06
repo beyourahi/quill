@@ -1,11 +1,7 @@
 import Link from "next/link";
 import { Container } from "./Container";
 import { buttonVariants } from "@/components/ui/button";
-import {
-    LoginLink,
-    RegisterLink,
-    getKindeServerSession
-} from "@kinde-oss/kinde-auth-nextjs/server";
+import { LoginLink, RegisterLink } from "@kinde-oss/kinde-auth-nextjs/server";
 import { ArrowRight } from "lucide-react";
 // import UserAccountNav from "./UserAccountNav";
 // import MobileNav from "./MobileNav";

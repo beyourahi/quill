@@ -1,7 +1,9 @@
+import { cn } from "@/lib/utils";
 import "./globals.css";
 import { Navbar } from "@/components/global/Navbar";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { PropsWithChildren } from "react";
 
 export const metadata: Metadata = {
     title: "Quill",
@@ -10,11 +12,11 @@ export const metadata: Metadata = {
 
 const inter = Inter({ subsets: ["latin"] });
 
-const RootLayout = ({ children }: { children: React.ReactNode }) => (
+const RootLayout = ({ children }: PropsWithChildren) => (
     <html lang="en" className="light">
-        <body className={`grainy min-h-screen font-sans antialiased ${inter.className}`}>
+        <body className={cn(inter.className, "grainy min-h-screen font-sans antialiased")}>
             <Navbar />
-            {children}
+            <main>{children}</main>
         </body>
     </html>
 );
