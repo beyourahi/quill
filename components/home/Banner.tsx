@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { Container } from "@/components/global/Container";
-import { buttonVariants } from "@/components/ui/button";
+import { Container } from "components/global/Container";
+import { buttonVariants } from "components/ui/button";
 import { ArrowRight } from "lucide-react";
 
 export const Banner = () => (

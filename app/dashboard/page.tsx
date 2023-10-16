@@ -1,6 +1,8 @@
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
 
+export const runtime = "edge";
+
 const Dashboard = async () => {
     const { getUser } = getKindeServerSession();
     const user = await getUser();
