@@ -4,8 +4,7 @@ import { redirect } from "next/navigation";
 export const runtime = "edge";
 
 const Dashboard = async () => {
-    const { getUser } = getKindeServerSession();
-    const user = await getUser();
+    const user = await getKindeServerSession().getUser();
 
     if (!user || !user.id) redirect("/auth-callback?origin=dashboard");
 
