@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { PropsWithChildren } from "react";
 import Providers from "./providers";
+import "react-loading-skeleton/dist/skeleton.css";
 
 export const metadata: Metadata = {
     title: "Quill",

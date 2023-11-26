@@ -6,21 +6,11 @@ import { Loader2 } from "lucide-react";
 
 const AuthCallback = () => {
     const router = useRouter();
-    const searchParams = useSearchParams();
-    const origin = searchParams.get("origin");
+    const origin = useSearchParams().get("origin");
 
     trpc.authCallback.useQuery(undefined, {
-        onSuccess: ({ success }) => {
-            if (success) {
-                // user is synced to db
-                router.push(origin ? `/${origin}` : "/dashboard");
-            }
-        },
-        onError: err => {
-            if (err.data?.code === "UNAUTHORIZED") {
-                router.push("/sign-in");
-            }
-        },
+        onSuccess: ({ success }) => success && router.push(origin ? `/${origin}` : "/dashboard"),
+        onError: err => err.data?.code === "UNAUTHORIZED" && router.push("/sign-in"),
         retry: true,
         retryDelay: 500
     });
