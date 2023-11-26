@@ -5,16 +5,12 @@ import { httpBatchLink } from "@trpc/client";
 import { PropsWithChildren, useState } from "react";
 import { trpc } from "app/_trpc";
 
-const Provider = ({ children }: PropsWithChildren) => {
+const URL = "https://localhost:3000/api/trpc";
+
+const Providers = ({ children }: PropsWithChildren) => {
     const [queryClient] = useState(() => new QueryClient());
     const [trpcClient] = useState(() =>
-        trpc.createClient({
-            links: [
-                httpBatchLink({
-                    url: "https://localhost:3000/api/trpc"
-                })
-            ]
-        })
+        trpc.createClient({ links: [httpBatchLink({ url: URL })] })
     );
 
     return (
@@ -24,4 +20,4 @@ const Provider = ({ children }: PropsWithChildren) => {
     );
 };
 
-export default Provider;
+export default Providers;
