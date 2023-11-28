@@ -1,20 +1,21 @@
 "use client";
 
-import { Progress } from "@radix-ui/react-progress";
+import { Progress } from "components/ui/progress";
 import { trpc } from "app/_trpc";
 import { Cloud, Loader2, File } from "lucide-react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Dropzone from "react-dropzone";
 import { useToast } from "components/ui/use-toast";
+import { cn } from "lib/utils";
+import { useUploadThing } from "lib/uploadthing";
 
 export const UploadDropzone = () => {
     const router = useRouter();
     const [isUploading, setIsUploading] = useState(false);
     const [uploadProgress, setUploadProgress] = useState(0);
     const { toast } = useToast();
-
-    // const { startUpload } = useUploadThing(isSubscribed ? "proPlanUploader" : "freePlanUploader");
+    const { startUpload } = useUploadThing("pdfUploader");
 
     const { mutate: startPolling } = trpc.getFile.useMutation({
         onSuccess: file => router.push(`/dashboard/${file.id}`),
@@ -45,27 +46,28 @@ export const UploadDropzone = () => {
                 // handle file uploading
                 const res = await startUpload(acceptedFile);
 
-                !res &&
-                    toast({
+                if (!res) {
+                    return toast({
                         title: "Something went wrong",
                         description: "Please try again later",
                         variant: "destructive"
                     });
+                }
 
                 const [fileResponse] = res;
 
                 const key = fileResponse?.key;
 
-                !key &&
-                    toast({
+                if (!key) {
+                    return toast({
                         title: "Something went wrong",
                         description: "Please try again later",
                         variant: "destructive"
                     });
+                }
 
                 clearInterval(progressInterval);
                 setUploadProgress(100);
-
                 startPolling({ key });
             }}
         >
@@ -105,9 +107,9 @@ export const UploadDropzone = () => {
                             {isUploading ? (
                                 <div className="mx-auto mt-4 w-full max-w-xs">
                                     <Progress
-                                        // indicatorColor={
-                                        //     uploadProgress === 100 ? "bg-green-500" : ""
-                                        // }
+                                        indicatorColor={
+                                            uploadProgress === 100 ? "bg-green-500" : ""
+                                        }
                                         value={uploadProgress}
                                         className="h-1 w-full bg-zinc-200"
                                     />

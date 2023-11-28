@@ -1,11 +1,12 @@
-import { cn } from "lib/utils";
 import "./globals.css";
-import { Navbar } from "components/global/Navbar";
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { PropsWithChildren } from "react";
-import Providers from "./providers";
 import "react-loading-skeleton/dist/skeleton.css";
+import type { Metadata } from "next";
+import { PropsWithChildren } from "react";
+import { Inter } from "next/font/google";
+import Providers from "./providers";
+import { cn } from "lib/utils";
+import { Navbar } from "components/global/Navbar";
+import { Toaster } from "components/ui/toaster";
 
 export const metadata: Metadata = {
     title: "Quill",
@@ -18,6 +19,7 @@ const RootLayout = ({ children }: PropsWithChildren) => (
     <html lang="en" className="light">
         <body className={cn(inter.className, "grainy min-h-screen font-sans antialiased")}>
             <Providers>
+                <Toaster />
                 <Navbar />
                 {children}
             </Providers>
