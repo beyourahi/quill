@@ -1,3 +1,3 @@
-export * from "./Banner";
-export * from "./ValueProposition";
-export * from "./Feature";
+export * from "./banner";
+export * from "./value-proposition";
+export * from "./feature";

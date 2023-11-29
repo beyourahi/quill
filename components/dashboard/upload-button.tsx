@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Dialog, DialogContent, DialogTrigger } from "components/ui/dialog";
 import { Button } from "components/ui/button";
-import { UploadDropzone } from "./UploadDropzone";
+import { UploadDropzone } from "./upload-dropzone";
 
 export const UploadButton = () => {
     const [isOpen, setIsOpen] = useState(false);

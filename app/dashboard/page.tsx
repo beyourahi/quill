@@ -1,5 +1,5 @@
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { Dashboard } from "components/Dashboard";
+import { Dashboard } from "components/dashboard";
 import { db } from "db";
 import { redirect } from "next/navigation";
 

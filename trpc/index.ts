@@ -3,15 +3,15 @@ import { TRPCError, initTRPC } from "@trpc/server";
 import { db } from "db";
 import { z } from "zod";
 
-const isAuth = initTRPC.create().middleware(async opts => {
+const t = initTRPC.create();
+const isAuth = t.middleware(async opts => {
     const user = await getKindeServerSession().getUser();
     if (!user || !user.id) throw new TRPCError({ code: "UNAUTHORIZED" });
     return opts.next({ ctx: { userId: user.id, user } });
 });
-
-export const router = initTRPC.create().router;
-export const publicProcedure = initTRPC.create().procedure;
-export const privateProcedure = initTRPC.create().procedure.use(isAuth);
+const router = t.router;
+const publicProcedure = t.procedure;
+const privateProcedure = t.procedure.use(isAuth);
 
 export const appRouter = router({
     authCallback: publicProcedure.query(async () => {
@@ -32,6 +32,16 @@ export const appRouter = router({
         async ({ ctx: { userId } }) => await db.file.findMany({ where: { userId } })
     ),
 
+    getFile: privateProcedure
+        .input(z.object({ key: z.string() }))
+        .mutation(async ({ ctx: { userId }, input }) => {
+            const file = await db.file.findFirst({ where: { key: input.key, userId } });
+
+            if (!file) throw new TRPCError({ code: "NOT_FOUND" });
+
+            return file;
+        }),
+
     deleteFile: privateProcedure
         .input(z.object({ id: z.string() }))
         .mutation(async ({ ctx: { userId }, input }) => {
@@ -40,16 +50,6 @@ export const appRouter = router({
             if (!file) throw new TRPCError({ code: "NOT_FOUND" });
 
             await db.file.delete({ where: { id: input.id } });
-
-            return file;
-        }),
-
-    getFile: privateProcedure
-        .input(z.object({ key: z.string() }))
-        .mutation(async ({ ctx: { userId }, input }) => {
-            const file = await db.file.findFirst({ where: { key: input.key, userId } });
-
-            if (!file) throw new TRPCError({ code: "NOT_FOUND" });
 
             return file;
         })

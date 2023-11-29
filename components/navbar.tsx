@@ -1,14 +1,13 @@
 import Link from "next/link";
-import { Container } from "./Container";
+import { Container } from "./container";
 import { buttonVariants } from "components/ui/button";
 import { RegisterLink, LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { ArrowRight } from "lucide-react";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 // import UserAccountNav from "./UserAccountNav";
 // import MobileNav from "./MobileNav";
 
 export const Navbar = () => {
-    // const user = await getKindeServerSession().getUser();
-
     return (
         <nav className="sticky inset-x-0 top-0 z-30 h-14 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all">
             <Container>

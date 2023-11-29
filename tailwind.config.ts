@@ -7,9 +7,7 @@ export default withUt({
         container: {
             center: true,
             padding: "2rem",
-            screens: {
-                "2xl": "1400px"
-            }
+            screens: { "2xl": "1400px" }
         },
         extend: {
             colors: {
@@ -68,5 +66,5 @@ export default withUt({
             }
         }
     },
-    plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")]
+    plugins: [require("tailwindcss-animate")]
 });

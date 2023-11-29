@@ -1,18 +1,13 @@
 "use client";
 
 import { trpc } from "app/_trpc";
-import { UploadButton } from "./UploadButton";
+import { UploadButton } from "./upload-button";
 import { Ghost, Loader2, MessageSquare, Plus, Trash } from "lucide-react";
 import Skeleton from "react-loading-skeleton";
 import Link from "next/link";
-import { format } from "date-fns";
 import { Button } from "components/ui/button";
+import { format } from "date-fns";
 import { useState } from "react";
-// import { getUserSubscriptionPlan } from "lib";
-
-// interface Dashboard {
-//     subscriptionPlan: Awaited<ReturnType<typeof getUserSubscriptionPlan>>;
-// }
 
 export const Dashboard = () => {
     const [currentlyDeletingFile, setCurrentlyDeletingFile] = useState<string | null>(null);
@@ -22,7 +17,9 @@ export const Dashboard = () => {
     const { data: files, isLoading } = trpc.getUserFiles.useQuery();
 
     const { mutate: deleteFile } = trpc.deleteFile.useMutation({
-        onSuccess: () => utils.getUserFiles.invalidate(),
+        onSuccess: () => {
+            utils.getUserFiles.invalidate();
+        },
         onMutate({ id }) {
             setCurrentlyDeletingFile(id);
         },
@@ -32,15 +29,14 @@ export const Dashboard = () => {
     });
 
     return (
-        <main className="mx-auto max-w-7xl md:p-10">
+        <div className="mx-auto max-w-7xl md:p-10">
             <div className="mt-8 flex flex-col items-start justify-between gap-4 border-b border-gray-200 pb-5 sm:flex-row sm:items-center sm:gap-0">
                 <h1 className="mb-3 text-5xl font-bold text-gray-900">My Files</h1>
-
                 <UploadButton />
             </div>
 
             {/* display all user files */}
-            {files && files.length !== 0 ? (
+            {files && files?.length !== 0 ? (
                 <ul className="mt-8 grid grid-cols-1 gap-6 divide-y divide-zinc-200 md:grid-cols-2 lg:grid-cols-3">
                     {files
                         .sort(
@@ -54,18 +50,12 @@ export const Dashboard = () => {
                             >
                                 <Link
                                     href={`/dashboard/${file.id}`}
-                                    className="flex flex-col gap-2"
+                                    className="flex w-full items-center justify-between gap-2 space-x-6 px-6 pt-6"
                                 >
-                                    <div className="flex w-full items-center justify-between space-x-6 px-6 pt-6">
-                                        <div className="h-10 w-10 flex-shrink-0 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500" />
-                                        <div className="flex-1 truncate">
-                                            <div className="flex items-center space-x-3">
-                                                <h3 className="truncate text-lg font-medium text-zinc-900">
-                                                    {file.name}
-                                                </h3>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <div className="h-10 w-10 flex-shrink-0 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500" />
+                                    <h3 className="flex flex-1 items-center space-x-3 truncate text-lg font-medium text-zinc-900">
+                                        {file.name}
+                                    </h3>
                                 </Link>
 
                                 <div className="mt-4 grid grid-cols-3 place-items-center gap-6 px-6 py-2 text-xs text-zinc-500">
@@ -76,7 +66,7 @@ export const Dashboard = () => {
 
                                     <div className="flex items-center gap-2">
                                         <MessageSquare className="h-4 w-4" />
-                                        mocked
+                                        69
                                     </div>
 
                                     <Button
@@ -104,6 +94,6 @@ export const Dashboard = () => {
                     <p>Let&apos;s upload your first PDF.</p>
                 </div>
             )}
-        </main>
+        </div>
     );
 };

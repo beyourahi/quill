@@ -5,7 +5,7 @@ import { httpBatchLink } from "@trpc/client";
 import { PropsWithChildren, useState } from "react";
 import { trpc } from "app/_trpc";
 
-const URL = "https://localhost:3000/api/trpc";
+const URL = "http://localhost:3000/api/trpc";
 
 const Providers = ({ children }: PropsWithChildren) => {
     const [queryClient] = useState(() => new QueryClient());
