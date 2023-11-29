@@ -20,7 +20,7 @@ import {
     DropdownMenuTrigger
 } from "components/ui/dropdown-menu";
 import SimpleBar from "simplebar-react";
-// import PdfFullscreen from "./PdfFullscreen";
+import { PdfFullscreen } from "./pdf-fullscreen";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -32,6 +32,7 @@ export const PdfRenderer = ({ url }: { url: string }) => {
     const [rotation, setRotation] = useState(0);
     const [renderedScale, setRenderedScale] = useState<number | null>(null);
     const isLoading = renderedScale !== scale;
+    const { width, ref } = useResizeDetector();
     const Validator = z.object({
         page: z.string().refine(num => Number(num) > 0 && Number(num) <= numPages!)
     });
@@ -44,8 +45,6 @@ export const PdfRenderer = ({ url }: { url: string }) => {
         formState: { errors },
         setValue
     } = useForm<Validator>({ defaultValues: { page: "1" }, resolver: zodResolver(Validator) });
-
-    const { width, ref } = useResizeDetector();
 
     return (
         <div className="flex w-full flex-col items-center rounded-md bg-white shadow">
@@ -119,7 +118,7 @@ export const PdfRenderer = ({ url }: { url: string }) => {
                         <RotateCw className="h-4 w-4" />
                     </Button>
 
-                    {/* <PdfFullscreen fileUrl={url} /> */}
+                    <PdfFullscreen fileUrl={url} />
                 </div>
             </div>
 
