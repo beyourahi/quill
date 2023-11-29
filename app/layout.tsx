@@ -17,7 +17,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 const RootLayout = ({ children }: PropsWithChildren) => (
     <html lang="en" className="light">
-        <body className={cn(inter.className, "grainy min-h-screen font-sans antialiased")}>
+        <body className={cn("grainy min-h-screen font-sans antialiased", inter.className)}>
             <Providers>
                 <Toaster />
                 <Navbar />
