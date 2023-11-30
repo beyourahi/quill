@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Container } from "../container";
+import { Container } from "../../../components/container";
 import { NavLinks } from "./nav-links";
 // import MobileNav from "./MobileNav";
 

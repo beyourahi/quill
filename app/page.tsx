@@ -1,4 +1,4 @@
-import { Banner, Features, ValueProposition } from "components/home";
+import { Banner, Features, ValueProposition } from "app/_components";
 
 const Home = () => (
     <div>

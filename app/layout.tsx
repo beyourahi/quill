@@ -1,7 +1,7 @@
 import "./globals.css";
 import "react-loading-skeleton/dist/skeleton.css";
 import "simplebar-react/dist/simplebar.min.css";
-import { Navbar } from "components/navbar";
+import { Navbar } from "app/_components";
 import { cn } from "lib";
 import { Inter } from "next/font/google";
 import { Toaster } from "components/ui/toaster";

@@ -1,7 +1,7 @@
 import { Button } from "components/ui/button";
 import { Avatar, AvatarFallback } from "components/ui/avatar";
 import Image from "next/image";
-import { Icons } from "../icons";
+import { Icons } from "components/icons";
 
 export const UserAvatar = ({ imageUrl, name }: { imageUrl: string; name: string }) => (
     <Button className="aspect-square h-8 w-8 rounded-full bg-slate-400">
