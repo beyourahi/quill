@@ -2,7 +2,7 @@ import { db } from "db";
 // import { getUserSubscriptionPlan } from "lib/stripe";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { notFound, redirect } from "next/navigation";
-import { PdfRenderer } from "app/dashboard/[fileId]/_components";
+import { PdfRenderer, Chat } from "app/dashboard/[fileId]/_components";
 
 const File = async ({ params: { fileId } }: { params: { fileId: string } }) => {
     const user = await getKindeServerSession().getUser();
@@ -23,11 +23,10 @@ const File = async ({ params: { fileId } }: { params: { fileId: string } }) => {
                 </div>
 
                 <div className="flex-[0.75] shrink-0 border-t border-gray-200 lg:w-96 lg:border-l lg:border-t-0">
-                    {/* <ChatWrapper
+                    <Chat
                         // isSubscribed={plan.isSubscribed}
                         fileId={file.id}
-                    /> */}
-                    ChatWrapper
+                    />
                 </div>
             </div>
         </div>

@@ -3,18 +3,12 @@ import { useState } from "react";
 import { Button } from "components/ui/button";
 import { Loader2, Trash } from "lucide-react";
 
-interface DeleteButton {
-    fileId: string;
-}
-
-export const FileItemDeleteButton = ({ fileId }: DeleteButton) => {
+export const FileItemDeleteButton = ({ fileId }: { fileId: string }) => {
     const [currentlyDeletingFile, setCurrentlyDeletingFile] = useState<string | null>(null);
-
-    const utils = trpc.useUtils();
 
     const { mutate: deleteFile } = trpc.deleteFile.useMutation({
         onSuccess: () => {
-            utils.getUserFiles.invalidate();
+            trpc.useUtils().getUserFiles.invalidate();
         },
         onMutate({ id }) {
             setCurrentlyDeletingFile(id);

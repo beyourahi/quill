@@ -52,6 +52,16 @@ export const appRouter = router({
             await db.file.delete({ where: { id: input.id } });
 
             return file;
+        }),
+
+    getFileUploadStatus: privateProcedure
+        .input(z.object({ fileId: z.string() }))
+        .query(async ({ ctx: { userId }, input }) => {
+            const file = await db.file.findFirst({ where: { id: input.fileId, userId } });
+
+            if (!file) return { status: "PENDING" as const };
+
+            return { status: file.uploadStatus };
         })
 });
 
