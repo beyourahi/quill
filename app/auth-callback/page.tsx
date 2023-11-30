@@ -10,7 +10,7 @@ const AuthCallback = () => {
 
     trpc.authCallback.useQuery(undefined, {
         onSuccess: ({ success }) => success && router.push(`/${origin || "dashboard"}`),
-        onError: err => err.data?.code === "UNAUTHORIZED" && router.push("/sign-in"),
+        onError: err => err.data?.code === "UNAUTHORIZED" && router.push("/api/auth/register"),
         retry: true,
         retryDelay: 500
     });

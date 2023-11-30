@@ -1,10 +1,10 @@
-import { Banner, Feature, ValueProposition } from "components/home";
+import { Banner, Features, ValueProposition } from "components/home";
 
 const Home = () => (
     <div>
         <Banner />
         <ValueProposition />
-        <Feature />
+        <Features />
     </div>
 );
 

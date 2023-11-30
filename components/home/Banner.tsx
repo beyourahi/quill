@@ -3,9 +3,10 @@ import { Container } from "components/container";
 import { buttonVariants } from "components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { RegisterLink, LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
-export const Banner = () => {
+export const Banner = async () => {
+    const user = await getKindeServerSession().getUser();
+
     return (
         <Container className="mb-12 mt-28 flex flex-col items-center justify-center text-center sm:mt-40">
             <p className="mx-auto mb-4 flex max-w-fit items-center justify-center space-x-2 overflow-hidden rounded-full border border-gray-200 bg-white px-7 py-2 text-sm font-semibold text-gray-700 shadow-md backdrop-blur">
@@ -21,15 +22,27 @@ export const Banner = () => {
                 file and start asking questions right away.
             </p>
 
-            <Link
-                className={buttonVariants({
-                    size: "lg",
-                    className: "mt-5"
-                })}
-                href="/dashboard"
-            >
-                Go to Dashboard <ArrowRight className="ml-2 h-5 w-5" />
-            </Link>
+            {user ? (
+                <Link
+                    className={buttonVariants({
+                        size: "lg",
+                        className: "mt-5"
+                    })}
+                    href="/dashboard"
+                >
+                    Go to Dashboard <ArrowRight className="ml-2 h-5 w-5" />
+                </Link>
+            ) : (
+                <Link
+                    className={buttonVariants({
+                        size: "lg",
+                        className: "mt-5"
+                    })}
+                    href="/api/auth/register"
+                >
+                    Get Started <ArrowRight className="ml-2 h-5 w-5" />
+                </Link>
+            )}
         </Container>
     );
 };

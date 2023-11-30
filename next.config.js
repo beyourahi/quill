@@ -1,6 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    images: { formats: ["image/avif", "image/webp"] },
+    images: {
+        formats: ["image/avif", "image/webp"],
+        remotePatterns: [
+            {
+                hostname: "lh3.googleusercontent.com"
+            }
+        ]
+    },
     async redirects() {
         return [
             {
