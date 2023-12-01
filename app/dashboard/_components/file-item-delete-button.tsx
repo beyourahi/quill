@@ -5,10 +5,11 @@ import { Loader2, Trash } from "lucide-react";
 
 export const FileItemDeleteButton = ({ fileId }: { fileId: string }) => {
     const [currentlyDeletingFile, setCurrentlyDeletingFile] = useState<string | null>(null);
+    const utils = trpc.useUtils();
 
     const { mutate: deleteFile } = trpc.deleteFile.useMutation({
         onSuccess: () => {
-            trpc.useUtils().getUserFiles.invalidate();
+            utils.getUserFiles.invalidate();
         },
         onMutate({ id }) {
             setCurrentlyDeletingFile(id);
