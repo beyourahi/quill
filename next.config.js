@@ -1,12 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        formats: ["image/avif", "image/webp"],
-        remotePatterns: [
-            {
-                hostname: "lh3.googleusercontent.com"
-            }
-        ]
+        domains: ["lh3.googleusercontent.com"]
     },
     async redirects() {
         return [
@@ -22,6 +17,7 @@ const nextConfig = {
             }
         ];
     },
+
     webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
         config.resolve.alias.canvas = false;
         config.resolve.alias.encoding = false;

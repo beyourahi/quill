@@ -1,13 +1,14 @@
-import { withUt } from "uploadthing/tw";
-
-export default withUt({
+/** @type {import('tailwindcss').Config} */
+module.exports = {
     darkMode: ["class"],
-    content: ["./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}"],
+    content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
     theme: {
         container: {
             center: true,
             padding: "2rem",
-            screens: { "2xl": "1400px" }
+            screens: {
+                "2xl": "1400px"
+            }
         },
         extend: {
             colors: {
@@ -52,12 +53,12 @@ export default withUt({
             },
             keyframes: {
                 "accordion-down": {
-                    from: { height: "0" },
+                    from: { height: 0 },
                     to: { height: "var(--radix-accordion-content-height)" }
                 },
                 "accordion-up": {
                     from: { height: "var(--radix-accordion-content-height)" },
-                    to: { height: "0" }
+                    to: { height: 0 }
                 }
             },
             animation: {
@@ -66,5 +67,5 @@ export default withUt({
             }
         }
     },
-    plugins: [require("tailwindcss-animate")]
-});
+    plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")]
+};
