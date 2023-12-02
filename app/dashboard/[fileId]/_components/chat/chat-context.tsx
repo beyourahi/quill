@@ -4,24 +4,24 @@ import { useMutation } from "@tanstack/react-query";
 import { trpc } from "app/_trpc";
 // import { INFINITE_QUERY_LIMIT } from "@/config/infinite-query";
 
-type StreamResponse = {
+interface ChatContext {
     addMessage: () => void;
     message: string;
     handleInputChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
     isLoading: boolean;
-};
-
-export const ChatContext = createContext<StreamResponse>({
-    addMessage: () => {},
-    message: "",
-    handleInputChange: () => {},
-    isLoading: false
-});
+}
 
 interface ChatContextProvider {
     fileId: string;
     children: ReactNode;
 }
+
+export const ChatContext = createContext<ChatContext>({
+    addMessage: () => {},
+    message: "",
+    handleInputChange: () => {},
+    isLoading: false
+});
 
 export const ChatContextProvider = ({ fileId, children }: ChatContextProvider) => {
     const [message, setMessage] = useState("");

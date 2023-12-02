@@ -15,9 +15,9 @@ export const Chat = ({ fileId }: { fileId: string }) => {
         }
     );
 
-    if (isLoading) return <State state="loading" />;
-    if (data?.status === "PROCESSING") return <State state="processing" />;
-    if (data?.status === "FAILED") return <State state="failed" />;
+    if (isLoading) return <State state="LOADING" />;
+    if (data?.status === "PROCESSING") return <State state="PROCESSING" />;
+    if (data?.status === "FAILED") return <State state="FAILED" />;
 
     return (
         <ChatContextProvider fileId={fileId}>

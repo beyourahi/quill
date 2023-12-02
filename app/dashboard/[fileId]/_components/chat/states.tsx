@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const states = [
     {
-        name: "loading",
+        name: "LOADING",
         component: (
             <>
                 <Loader2 className="h-8 w-8 animate-spin text-blue-500" />
@@ -15,7 +15,7 @@ const states = [
         )
     },
     {
-        name: "processing",
+        name: "PROCESSING",
         component: (
             <>
                 <Loader2 className="h-8 w-8 animate-spin text-blue-500" />
@@ -25,7 +25,7 @@ const states = [
         )
     },
     {
-        name: "failed",
+        name: "FAILED",
         component: (
             <>
                 <XCircle className="h-8 w-8 text-red-500" />
@@ -54,7 +54,7 @@ const states = [
     }
 ];
 
-export const State = ({ state }: { state: "loading" | "processing" | "failed" }) => {
+export const State = ({ state }: { state: "LOADING" | "PROCESSING" | "FAILED" }) => {
     const { component } = states.find(s => s.name === state) ?? states[0];
 
     return (
